@@ -35,7 +35,7 @@ const Hero = () => {
                 <div className="flex justify-center md:justify-end">
                     <div className="w-64 h-64 md:w-96 md:h-96 rounded-full bg-gray-300 overflow-hidden border-4 border-blue-500/20 shadow-[0_0_50px_rgba(37,99,235,0.2)]">
                         <img
-                            src="../src/assets/img/mfg.png"
+                            src="../../public/mfg.png"
                             alt="Máximo Goitia"
                             className="w-full h-full object-contain  grayscale hover:grayscale-0 transition-all duration-500"
                         />
