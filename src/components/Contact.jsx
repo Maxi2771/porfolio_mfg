@@ -1,13 +1,13 @@
 import { useRef } from "react";
 import emailjs from '@emailjs/browser';
-import email from '../../.env';
+const email = import.meta.env;
 const Contact = () => {
     const form = useRef();
 
     const sendEmail = (e) => {
         e.preventDefault();
 
-        emailjs.sendForm('servicio_mfg', 'template_mfg', form.current, email.emailjs_service_id)
+        emailjs.sendForm(email.emailjs_service_name, email.emailjs_template_id, form.current, email.emailjs_service_id)
             .then((result) => {
                 alert("¡Mensaje enviado con éxito!");
             }, (error) => {
