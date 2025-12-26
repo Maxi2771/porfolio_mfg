@@ -14,7 +14,7 @@ const About = () => {
                                 Mi enfoque se centra en el desarrollo de soluciones web modernas y eficientes. Tengo experiencia en el diseño y desarrollo de interfaces intuitivas, así como en la implementación de funcionalidades robustas que mejoren la experiencia del usuario.
                             </p>
                         </div>
-                        <img src="../../public/sobre_mi.jpeg" alt="Proyecto con Batocer" />
+                        <img src="sobre_mi.jpeg" alt="Proyecto con Batocer" />
                     </div>
                 </div>
             </div>
