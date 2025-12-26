@@ -34,14 +34,14 @@ const Projects = () => {
                 {proj.desc}
               </p>
 
-              <div className="flex gap-4">
+              <div className="flex gap-4 sm:flex-row flex-col">
                 {
                   proj.githubLink && proj.demoLink ? (
                     <>
-                      <a href={proj.githubLink} target="_blank" rel="noopener noreferrer" className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded text-sm transition-colors flex items-center justify-center gap-2">
+                      <a href={proj.githubLink} target="_blank" rel="noopener noreferrer" className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded text-sm md:text-xs transition-colors flex items-center justify-center gap-2">
                         <Github size={16} /> Repositorio GitHub
                       </a>
-                      <a href={proj.demoLink} target="_blank" rel="noopener noreferrer" className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded text-sm transition-colors flex items-center justify-center gap-2">
+                      <a href={proj.demoLink} target="_blank" rel="noopener noreferrer" className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded text-sm md:text-xs transition-colors flex items-center justify-center gap-2">
                         <ExternalLink size={16} /> Ver Demo
                       </a>
                     </>

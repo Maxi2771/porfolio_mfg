@@ -1,52 +1,92 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
 import emailjs from '@emailjs/browser';
-const email = import.meta.env;
+
 const Contact = () => {
     const form = useRef();
 
     const sendEmail = (e) => {
         e.preventDefault();
 
-        emailjs.sendForm(email.emailjs_service_name, email.emailjs_template_id, form.current, email.emailjs_service_id)
+        const serviceId = import.meta.env.VITE_SERVICE_ID;
+        const templateId = import.meta.env.VITE_TEMPLATE_ID;
+        const publicKey = import.meta.env.VITE_PUBLIC_KEY;
+
+        console.log("Intentando enviar con:", { serviceId, templateId, publicKey });
+
+        if (!serviceId || !templateId || !publicKey) {
+            alert("Error: Faltan las variables de entorno. Revisa tu archivo .env");
+            return;
+        }
+
+        emailjs.sendForm(serviceId, templateId, form.current, publicKey)
             .then((result) => {
+                console.log('ÉXITO:', result.text);
                 alert("¡Mensaje enviado con éxito!");
+                e.target.reset();
             }, (error) => {
-                alert("Ocurrió un error, intenta nuevamente.");
+                console.log('ERROR:', error.text);
+                alert("Ocurrió un error: " + error.text);
             });
     };
 
     return (
         <section className="bg-black text-white p-10" id="contacto">
-            <h2 className="text-4xl font-bold text-center text-blue-500 mb-10">Contacto</h2>
+            <div className="max-w-xl mx-auto">
+                <h2 className="text-4xl font-bold text-center text-blue-500 mb-10">Contacto</h2>
 
-            <form ref={form} onSubmit={sendEmail} className="max-w-lg mx-auto flex flex-col gap-4">
+                <form ref={form} onSubmit={sendEmail} className="flex flex-col gap-4">
 
-                <div className="flex gap-4">
-                    <div className="w-1/2">
-                        <label className="block mb-1">Nombre</label>
-                        <input type="text" name="user_name" className="w-full bg-transparent border-b border-gray-600 focus:border-blue-500 outline-none p-2" required />
+                    <div className="flex flex-col md:flex-row gap-4">
+                        <div className="w-full">
+                            <label className="block mb-1 text-sm text-gray-300">Nombre</label>
+                            <input 
+                                type="text" 
+                                name="name" 
+                                className="w-full bg-transparent border-b border-gray-600 focus:border-blue-500 outline-none p-2 transition-colors" 
+                                required 
+                            />
+                        </div>
+                        <div className="w-full">
+                            <label className="block mb-1 text-sm text-gray-300">Apellido</label>
+                            <input 
+                                type="text" 
+                                name="lastname" 
+                                className="w-full bg-transparent border-b border-gray-600 focus:border-blue-500 outline-none p-2 transition-colors" 
+                                required 
+                            />
+                        </div>
                     </div>
-                    <div className="w-1/2">
-                        <label className="block mb-1">Apellido</label>
-                        <input type="text" name="user_lastname" className="w-full bg-transparent border-b border-gray-600 focus:border-blue-500 outline-none p-2" required />
+
+                    <div>
+                        <label className="block mb-1 text-sm text-gray-300">Correo</label>
+                        <input 
+                            type="email" 
+                            name="email" 
+                            className="w-full bg-transparent border-b border-gray-600 focus:border-blue-500 outline-none p-2 transition-colors" 
+                            required 
+                        />
                     </div>
-                </div>
 
-                <div>
-                    <label className="block mb-1">Correo</label>
-                    <input type="email" name="user_email" className="w-full bg-transparent border-b border-gray-600 focus:border-blue-500 outline-none p-2" required />
-                </div>
+                    <div>
+                        <label className="block mb-1 text-sm text-gray-300">Mensaje</label>
+                        <textarea 
+                            name="message" 
+                            rows="4" 
+                            className="w-full bg-transparent border-b border-gray-600 focus:border-blue-500 outline-none p-2 resize-none transition-colors" 
+                            required 
+                        />
+                    </div>
 
-                <div>
-                    <label className="block mb-1">Mensaje</label>
-                    <textarea name="message" rows="4" className="w-full bg-transparent border-b border-gray-600 focus:border-blue-500 outline-none p-2" required />
-                </div>
-
-                <button type="submit" className="mt-4 bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded transition-colors">
-                    Enviar
-                </button>
-            </form>
+                    <button 
+                        type="submit" 
+                        className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded transition-all shadow-lg hover:shadow-blue-900/50"
+                    >
+                        Enviar Mensaje
+                    </button>
+                </form>
+            </div>
         </section>
     );
 };
+
 export default Contact;
