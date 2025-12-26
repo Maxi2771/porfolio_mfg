@@ -14,8 +14,8 @@ const Projects = () => {
       title: "Luxi Bot",
       desc: "Un bot de discord con javascript, está en fase de desarrollo cuenta con una web donde puedes ver los comandos y utilizarlos en tus servidores de discord. Actualmente en Desarrollo.",
       image: luxibot,
-      githubLink: "https://github.com/Maxi2771/NexoInventory",
-      demoLink: "https://nexoinventory.netlify.app/"
+      //githubLink: "https://github.com/Maxi2771/NexoInventory",
+      //demoLink: "https://nexoinventory.netlify.app/"
     }
   ];
 
@@ -35,12 +35,21 @@ const Projects = () => {
               </p>
 
               <div className="flex gap-4">
-                <a href={proj.githubLink} target="_blank" rel="noopener noreferrer" className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded text-sm transition-colors flex items-center justify-center gap-2">
-                  <Github size={16} /> Repositorio GitHub
-                </a>
-                <a href={proj.demoLink} target="_blank" rel="noopener noreferrer" className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded text-sm transition-colors flex items-center justify-center gap-2">
-                  <ExternalLink size={16} /> Ver Demo
-                </a>
+                {
+                  proj.githubLink && proj.demoLink ? (
+                    <>
+                      <a href={proj.githubLink} target="_blank" rel="noopener noreferrer" className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded text-sm transition-colors flex items-center justify-center gap-2">
+                        <Github size={16} /> Repositorio GitHub
+                      </a>
+                      <a href={proj.demoLink} target="_blank" rel="noopener noreferrer" className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded text-sm transition-colors flex items-center justify-center gap-2">
+                        <ExternalLink size={16} /> Ver Demo
+                      </a>
+                    </>
+                  ) : (
+                    <span className="italic text-blue-500 flex-1 py-2 rounded text-sm transition-colors flex items-center justify-center gap-2">Proyecto en desarrollo</span>
+                  )
+                    
+                }
               </div>
             </div>
           ))}
